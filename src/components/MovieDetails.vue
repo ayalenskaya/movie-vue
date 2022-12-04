@@ -1,9 +1,12 @@
 <script setup>
 import { ref, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
-
+import { useSearchStore } from "@/stores/SearchStore";
+import UIBtnAdd from "@/components/UI/UIBtnAdd";
+const searchStore = useSearchStore();
 const movie = ref({});
 const route = useRoute();
+const loading = ref(true);
 onBeforeMount(() => {
   fetch(
     `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=b22dc0726a9a08cf8017c57b02f109e7&language=Ru`
@@ -12,10 +15,12 @@ onBeforeMount(() => {
     .then((data) => {
       movie.value = data;
     });
+  loading.value = false;
 });
 </script>
 <template>
-  <div class="row">
+  <MyLoader v-if="loading" />
+  <div v-else class="row">
     <div class="container-fluid mb-4">
       <div class="text-white">
         <div class="col-lg-6 col-md-12 col-sm-12 m-auto image">
@@ -64,6 +69,7 @@ onBeforeMount(() => {
               </button></router-link
             >
           </div>
+          <UIBtnAdd @click="searchStore.addToUserMovies(movie)" />
         </div>
       </div>
     </div>

@@ -1,4 +1,7 @@
 <script setup>
+import { useSearchStore } from "@/stores/SearchStore";
+import UIBtnAdd from "@/components/UI/UIBtnAdd";
+const searchStore = useSearchStore();
 // eslint-disable-next-line
 const props = defineProps({
   movie: {
@@ -32,10 +35,11 @@ const preUrl = "https://image.tmdb.org/t/p/original/";
       </p>
       <router-link
         :to="`/MovieDetails/${movie.id}`"
-        class="btn bg-primary text-white"
+        class="btn bg-primary text-white m-1"
         id="MovieDetails"
         >Подробнее</router-link
       >
+      <UIBtnAdd @click="searchStore.addToUserMovies(movie)" />
     </div>
   </div>
 </template>

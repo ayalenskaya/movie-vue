@@ -2,8 +2,10 @@
 import { onBeforeMount, ref } from "vue";
 import MovieList from "@/components/MovieList";
 import MovieSort from "@/components/MovieSort";
-
+import MovieMain from "@/components/MovieMain";
+import MyLoader from "@/components/MyLoader";
 const movies = ref([]);
+const loading = ref(true);
 onBeforeMount(() => {
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=b22dc0726a9a08cf8017c57b02f109e7&language=ru-RU&page=1&region=Ru`
@@ -14,13 +16,16 @@ onBeforeMount(() => {
     .then((data) => {
       movies.value = data.results;
     });
+  loading.value = false;
 });
 </script>
 
 <template>
-  <div id="app">
+  <div>
+    <MovieMain />
     <MovieSort :movies="movies" />
-    <MovieList :movies="movies" />
+    <MyLoader v-if="loading" />
+    <MovieList v-else :movies="movies" />
   </div>
 </template>
 <style>
@@ -31,6 +36,13 @@ onBeforeMount(() => {
   text-align: center;
   color: #2c3e50;
   background: #6c757d;
+}
+body {
+  margin: 0;
+  background: #f9f9f9;
+}
+button {
+  border-radius: 10px;
 }
 
 nav {

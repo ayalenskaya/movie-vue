@@ -14,7 +14,7 @@ const props = defineProps({
 <template>
   <div class="container">
     <ul>
-      <li v-for="movie in movies" :key="movie.id" class="card p-1 my-3">
+      <li v-for="movie in movies" :key="movie.id" class="card p-1 my-3 m-1">
         <MovieCard :movie="movie" />
       </li>
     </ul>
