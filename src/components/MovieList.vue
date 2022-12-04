@@ -1,10 +1,14 @@
-<script>
+<script setup>
 import MovieCard from "@/components/MovieCard";
-export default {
-  name: "MovieList",
-  components: { MovieCard },
-  props: ["movies"],
-};
+
+// eslint-disable-next-line
+const props = defineProps({
+  movies: {
+    type: Object,
+    default: () => {},
+    requared: true,
+  },
+});
 </script>
 
 <template>

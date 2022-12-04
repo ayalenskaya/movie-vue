@@ -1,25 +1,18 @@
-<script>
+<script setup>
 import { ref, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
-export default {
-  setup() {
-    const movie = ref({});
-    const route = useRoute();
-    onBeforeMount(() => {
-      fetch(
-        `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=b22dc0726a9a08cf8017c57b02f109e7&language=Ru`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          movie.value = data;
-        });
-    });
 
-    return {
-      movie,
-    };
-  },
-};
+const movie = ref({});
+const route = useRoute();
+onBeforeMount(() => {
+  fetch(
+    `https://api.themoviedb.org/3/movie/${route.params.id}?api_key=b22dc0726a9a08cf8017c57b02f109e7&language=Ru`
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      movie.value = data;
+    });
+});
 </script>
 <template>
   <div class="row">

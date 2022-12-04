@@ -1,21 +1,20 @@
-<script>
-export default {
-  name: "MovieCard",
-  props: [
-    "movie",
-    "id",
-    "index",
-    "title",
-    "vote_average",
-    "overview",
-    "poster_path",
-  ],
-  setup() {
-    return {
-      preUrl: "https://image.tmdb.org/t/p/original/",
-    };
+<script setup>
+// eslint-disable-next-line
+const props = defineProps({
+  movie: {
+    type: Object,
+    default: () => {},
+    requared: true,
   },
-};
+  id: String,
+  index: String,
+  title: String,
+  vote_average: String,
+  overview: String,
+  poster_path: String,
+});
+
+const preUrl = "https://image.tmdb.org/t/p/original/";
 </script>
 
 <template>
