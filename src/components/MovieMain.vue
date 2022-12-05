@@ -28,7 +28,7 @@ const movieStore = useMovieStore();
     </div>
     <div v-if="movieStore.activeTab === 1" class="movies">
       <div>
-        <h3 class="text-white">Посмотрено</h3>
+        <h3 class="text-white">Просмотрено</h3>
         <Movie
           v-for="movie of movieStore.watchedMovies"
           :key="movie.id"

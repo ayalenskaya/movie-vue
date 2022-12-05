@@ -4,8 +4,10 @@ import MovieList from "@/components/MovieList";
 import MovieSort from "@/components/MovieSort";
 import MovieMain from "@/components/MovieMain";
 import MyLoader from "@/components/MyLoader";
+import { useSearchStore } from "@/stores/SearchStore";
 const movies = ref([]);
 const loading = ref(true);
+const searchStore = useSearchStore();
 onBeforeMount(() => {
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=b22dc0726a9a08cf8017c57b02f109e7&language=ru-RU&page=1&region=Ru`
@@ -24,7 +26,7 @@ onBeforeMount(() => {
   <div>
     <MovieMain />
     <MovieSort :movies="movies" />
-    <MyLoader v-if="loading" />
+    <MyLoader v-if="searchStore.loading" />
     <MovieList v-else :movies="movies" />
   </div>
 </template>
@@ -36,6 +38,7 @@ onBeforeMount(() => {
   text-align: center;
   color: #2c3e50;
   background: #6c757d;
+  min-height: 100vh;
 }
 body {
   margin: 0;
